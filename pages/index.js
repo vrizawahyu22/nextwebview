@@ -64,9 +64,8 @@
 //   )
 // }
 
-import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
-import { CameraFeed } from './components/camera-feed';
+import React from 'react';
+import CameraFeed from './components/camera-feed';
 
 // Upload to local seaweedFS instance
 const uploadImage = async file => {

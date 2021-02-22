@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class CameraFeed extends Component {
+class CameraFeed extends Component {
     /**
      * Processes available devices and identifies one by the label
      * @memberof CameraFeed
@@ -62,3 +62,5 @@ export class CameraFeed extends Component {
         );
     }
 }
+
+export default CameraFeed;
