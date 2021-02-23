@@ -88,6 +88,8 @@ class App extends React.Component {
     });
   }
   onSegChange = (e) => {
+    console.log("HALO");
+    window.postMessage("Hello React", "*");
     const index = e.nativeEvent.selectedSegmentIndex;
     this.setState({
       multiple: index === 1,
