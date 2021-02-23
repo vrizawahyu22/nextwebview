@@ -65,20 +65,54 @@
 // }
 
 import React from 'react';
-import Camera from 'react-html5-camera-photo';
-import 'react-html5-camera-photo/build/css/index.css';
- 
-function App (props) {
-  function handleTakePhoto (dataUri) {
-    // Do stuff with the photo...
-    console.log('takePhoto');
+import { ImagePicker, WingBlank, SegmentedControl } from 'antd-mobile';
+import 'antd-mobile/dist/antd-mobile.css';
+
+const data = [{
+  url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+  id: '2121',
+}, {
+  url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+  id: '2122',
+}];
+
+class App extends React.Component {
+  state = {
+    files: data,
+    multiple: false,
   }
- 
-  return (
-    <Camera
-      onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
-    />
-  );
+  onChange = (files, type, index) => {
+    console.log(files, type, index);
+    this.setState({
+      files,
+    });
+  }
+  onSegChange = (e) => {
+    const index = e.nativeEvent.selectedSegmentIndex;
+    this.setState({
+      multiple: index === 1,
+    });
+  }
+
+  render() {
+    const { files } = this.state;
+    return (
+      <WingBlank>
+        <SegmentedControl
+          values={['Halo', 'Coba']}
+          selectedIndex={this.state.multiple ? 1 : 0}
+          onChange={this.onSegChange}
+        />
+        <ImagePicker
+          files={files}
+          onChange={this.onChange}
+          onImageClick={(index, fs) => console.log(index, fs)}
+          selectable={files.length < 7}
+          multiple={this.state.multiple}
+        />
+      </WingBlank>
+    );
+  }
 }
- 
+
 export default App;
