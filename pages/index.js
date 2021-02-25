@@ -64,57 +64,88 @@
 //   )
 // }
 
-import React from 'react';
-import { ImagePicker, WingBlank, SegmentedControl } from 'antd-mobile';
-import 'antd-mobile/dist/antd-mobile.css';
+// import React from 'react';
+// import { ImagePicker, WingBlank, SegmentedControl } from 'antd-mobile';
+// import 'antd-mobile/dist/antd-mobile.css';
 
-const data = [{
-  url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
-  id: '2121',
-}, {
-  url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
-  id: '2122',
-}];
+// const data = [{
+//   url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+//   id: '2121',
+// }, {
+//   url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+//   id: '2122',
+// }];
 
-class App extends React.Component {
-  state = {
-    files: data,
-    multiple: false,
-  }
-  onChange = (files, type, index) => {
-    console.log(files, type, index);
-    this.setState({
-      files,
-    });
-  }
-  onSegChange = (e) => {
-    console.log("HALO");
-    window.postMessage("Hello React", "*");
-    const index = e.nativeEvent.selectedSegmentIndex;
-    this.setState({
-      multiple: index === 1,
-    });
-  }
+// class App extends React.Component {
+//   state = {
+//     files: data,
+//     multiple: false,
+//   }
+//   onChange = (files, type, index) => {
+//     console.log(files, type, index);
+//     this.setState({
+//       files,
+//     });
+//   }
+//   onSegChange = (e) => {
+//     console.log("HALO");
+//     window.postMessage("Hello React", "*");
+//     const index = e.nativeEvent.selectedSegmentIndex;
+//     this.setState({
+//       multiple: index === 1,
+//     });
+//   }
 
-  render() {
-    const { files } = this.state;
-    return (
-      <WingBlank>
-        <SegmentedControl
-          values={['Halo', 'Coba']}
-          selectedIndex={this.state.multiple ? 1 : 0}
-          onChange={this.onSegChange}
-        />
-        <ImagePicker
-          files={files}
-          onChange={this.onChange}
-          onImageClick={(index, fs) => console.log(index, fs)}
-          selectable={files.length < 7}
-          multiple={this.state.multiple}
-        />
-      </WingBlank>
-    );
-  }
+//   render() {
+//     const { files } = this.state;
+//     return (
+//       <WingBlank>
+//         <SegmentedControl
+//           values={['Halo', 'Coba']}
+//           selectedIndex={this.state.multiple ? 1 : 0}
+//           onChange={this.onSegChange}
+//         />
+//         <ImagePicker
+//           files={files}
+//           onChange={this.onChange}
+//           onImageClick={(index, fs) => console.log(index, fs)}
+//           selectable={files.length < 7}
+//           multiple={this.state.multiple}
+//         />
+//       </WingBlank>
+//     );
+//   }
+// }
+
+// export default App;
+
+import React, { useEffect, useState } from "react";
+import firebase from 'firebase/app';
+import { firebaseCloudMessaging } from "../webPush";
+
+function App() {
+  const [iniToken, setIniToken] = useState(null);
+  useEffect(() => {
+    setToken();
+    async function setToken() {
+      try {
+        const token = await firebaseCloudMessaging.init();
+        setIniToken(token);
+        console.log("token", token);
+        if (token) {
+          getMessage();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    function getMessage() {
+      const messaging = firebase.messaging();
+        messaging.onMessage((message) => console.log("foreground ", message));
+    }
+  }, []);
+
+  return <div>{iniToken}</div>;
 }
-
 export default App;
