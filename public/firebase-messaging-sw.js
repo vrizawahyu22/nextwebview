@@ -10,8 +10,8 @@
 //   firebase.messaging().setBackgroundMessageHandler((payload) => console.log("payload", payload));
 // }
 
-importScripts('https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/7.9.1/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js');
 
 firebase.initializeApp({
   apiKey: "AIzaSyAwbIboBajPTAfqkVV8SoafMpSXi9D6Tq4",
@@ -27,10 +27,11 @@ firebase.messaging();
 
 //background notifications will be received here
 firebase.messaging().setBackgroundMessageHandler((payload) => {
+  console.log("PAYLOAD", payload);
   const { title, body } = JSON.parse(payload.data.notification);
   var options = {
     body,
     icon: '/favicon.ico',
   };
-  registration.showNotification(title, options);
+  registration.showNotification(title);
 });

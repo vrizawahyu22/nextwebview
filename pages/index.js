@@ -120,11 +120,42 @@
 // export default App;
 
 import React, { useEffect, useState } from "react";
-import firebase from 'firebase/app';
 import { firebaseCloudMessaging } from "../webPush";
+import firebase from 'firebase/app';
 
 function App() {
   const [iniToken, setIniToken] = useState(null);
+  // useEffect(() => {
+  //   setToken();
+  //   async function setToken() {
+  //     try {
+  //       const token = await firebaseCloudMessaging.init();
+  //       setIniToken(token);
+  //       console.log("token", token);
+  //       if (token) {
+  //         getMessage();
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  //   // function getMessage() {
+  //   //   const messaging = firebase.messaging();
+  //   //     messaging.onMessage((message) => console.log("foreground ", message));
+  //   // }
+  //   function getMessage() {
+  //     const messaging = firebase.messaging();
+  //     console.log({ messaging });
+  //     messaging.onMessage((message) => {
+  //       const { title, body } = JSON.parse(message.data.notification);
+  //       var options = {
+  //         body,
+  //       };
+  //       self.registration.showNotification(title, options);
+  //     });
+  //   }
+  // }, []);
   useEffect(() => {
     setToken();
     async function setToken() {
@@ -139,12 +170,19 @@ function App() {
         console.log(error);
       }
     }
-
     function getMessage() {
       const messaging = firebase.messaging();
-        messaging.onMessage((message) => console.log("foreground ", message));
+      console.log({ messaging });
+      messaging.onMessage((message) => {
+        console.log("MASUK SINI DONG");
+        const { title, body } = JSON.parse(message.data.notification);
+        var options = {
+          body,
+        };
+        self.registration.showNotification(title, options);
+      });
     }
-  }, []);
+  });
 
   return <div>{iniToken}</div>;
 }
