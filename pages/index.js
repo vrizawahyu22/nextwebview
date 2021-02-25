@@ -125,6 +125,7 @@ import firebase from 'firebase/app';
 
 function App() {
   const [iniToken, setIniToken] = useState(null);
+  const [iniMessage, setIniMessage] = useState(null);
   // useEffect(() => {
   //   setToken();
   //   async function setToken() {
@@ -162,7 +163,6 @@ function App() {
       try {
         const token = await firebaseCloudMessaging.init();
         setIniToken(token);
-        console.log("token", token);
         if (token) {
           getMessage();
         }
@@ -174,6 +174,7 @@ function App() {
       const messaging = firebase.messaging();
       console.log({ messaging });
       messaging.onMessage((message) => {
+        setIniMessage(message);
         console.log("MASUK SINI DONG");
         const { title, body } = JSON.parse(message.data.notification);
         var options = {
@@ -184,6 +185,6 @@ function App() {
     }
   });
 
-  return <div>{iniToken}</div>;
+  return <div>{iniToken}, {iniMessage}</div>;
 }
 export default App;
