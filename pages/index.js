@@ -1,68 +1,81 @@
-// import Head from 'next/head'
-// import styles from '../styles/Home.module.css'
+import React, {useEffect} from 'react';
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
 
-// export default function Home() {
-//   return (
-//     <div className={styles.container}>
-//       <Head>
-//         <title>Create Next App</title>
-//         <link rel="icon" href="/favicon.ico" />
-//       </Head>
+export default function Home() {
 
-//       <main className={styles.main}>
-//         <h1 className={styles.title}>
-//           Welcome to <a href="https://nextjs.org">Next.js!</a>
-//         </h1>
+  useEffect(() => {
+    window.addEventListener("message", function(event) {
+      console.log("Received post message", event);
+    }, false);
+  }, []);
 
-//         <p className={styles.description}>
-//           Get started by editing{' '}
-//           <code className={styles.code}>pages/index.js</code>
-//         </p>
+  const onPostMessage = () => {
+    window.postMessage("Post message from web", "*");
+  } 
 
-//         <div className={styles.grid}>
-//           <a href="https://nextjs.org/docs" className={styles.card}>
-//             <h3>Documentation &rarr;</h3>
-//             <p>Find in-depth information about Next.js features and API.</p>
-//           </a>
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <button onClick={onPostMessage}>Halooo</button>
 
-//           <a href="https://nextjs.org/learn" className={styles.card}>
-//             <h3>Learn &rarr;</h3>
-//             <p>Learn about Next.js in an interactive course with quizzes!</p>
-//           </a>
+      {/* <main className={styles.main}>
+        <h1 className={styles.title}>
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </h1>
 
-//           <a
-//             href="https://github.com/vercel/next.js/tree/master/examples"
-//             className={styles.card}
-//           >
-//             <h3>Examples &rarr;</h3>
-//             <p>Discover and deploy boilerplate example Next.js projects.</p>
-//           </a>
+        <p className={styles.description}>
+          Get started by editing{' '}
+          <code className={styles.code}>pages/index.js</code>
+        </p>
 
-//           <a
-//             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-//             className={styles.card}
-//           >
-//             <h3>Deploy &rarr;</h3>
-//             <p>
-//               Instantly deploy your Next.js site to a public URL with Vercel.
-//             </p>
-//           </a>
-//         </div>
-//       </main>
+        <div className={styles.grid}>
+          <a href="https://nextjs.org/docs" className={styles.card}>
+            <h3>Documentation &rarr;</h3>
+            <p>Find in-depth information about Next.js features and API.</p>
+          </a>
 
-//       <footer className={styles.footer}>
-//         <a
-//           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Powered by{' '}
-//           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-//         </a>
-//       </footer>
-//     </div>
-//   )
-// }
+          <a href="https://nextjs.org/learn" className={styles.card}>
+            <h3>Learn &rarr;</h3>
+            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          </a>
+
+          <a
+            href="https://github.com/vercel/next.js/tree/master/examples"
+            className={styles.card}
+          >
+            <h3>Examples &rarr;</h3>
+            <p>Discover and deploy boilerplate example Next.js projects.</p>
+          </a>
+
+          <a
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+          >
+            <h3>Deploy &rarr;</h3>
+            <p>
+              Instantly deploy your Next.js site to a public URL with Vercel.
+            </p>
+          </a>
+        </div>
+      </main> */}
+
+      <footer className={styles.footer}>
+        <a
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powered by{' '}
+          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+        </a>
+      </footer>
+    </div>
+  )
+}
 
 // import React from 'react';
 // import { ImagePicker, WingBlank, SegmentedControl } from 'antd-mobile';
@@ -119,72 +132,43 @@
 
 // export default App;
 
-import React, { useEffect, useState } from "react";
-import { firebaseCloudMessaging } from "../webPush";
-import firebase from 'firebase/app';
+// import React, { useEffect, useState } from "react";
+// import { firebaseCloudMessaging } from "../webPush";
+// import firebase from 'firebase/app';
 
-function App() {
-  const [iniToken, setIniToken] = useState(null);
-  const [iniMessage, setIniMessage] = useState(null);
-  // useEffect(() => {
-  //   setToken();
-  //   async function setToken() {
-  //     try {
-  //       const token = await firebaseCloudMessaging.init();
-  //       setIniToken(token);
-  //       console.log("token", token);
-  //       if (token) {
-  //         getMessage();
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
+// function App() {
+//   const [iniToken, setIniToken] = useState(null);
+//   const [iniMessage, setIniMessage] = useState(null);
 
-  //   // function getMessage() {
-  //   //   const messaging = firebase.messaging();
-  //   //     messaging.onMessage((message) => console.log("foreground ", message));
-  //   // }
-  //   function getMessage() {
-  //     const messaging = firebase.messaging();
-  //     console.log({ messaging });
-  //     messaging.onMessage((message) => {
-  //       const { title, body } = JSON.parse(message.data.notification);
-  //       var options = {
-  //         body,
-  //       };
-  //       self.registration.showNotification(title, options);
-  //     });
-  //   }
-  // }, []);
-  useEffect(() => {
-    setToken();
-    async function setToken() {
-      try {
-        const token = await firebaseCloudMessaging.init();
-        setIniToken(token);
-        if (token) {
-          getMessage();
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    function getMessage() {
-      const messaging = firebase.messaging();
-      console.log({ messaging });
-      messaging.onMessage((message) => {
-        setIniMessage(message);
-        console.log("MASUK SINI DONG");
-        const { title, body } = JSON.parse(message.data.notification);
-        var options = {
-          body,
-        };
-        self.registration.showNotification(title, options);
-      });
-    }
-  });
+//   useEffect(() => {
+//     setToken();
+//     async function setToken() {
+//       try {
+//         const token = await firebaseCloudMessaging.init();
+//         setIniToken(token);
+//         if (token) {
+//           getMessage();
+//         }
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     }
+//     function getMessage() {
+//       const messaging = firebase.messaging();
+//       console.log({ messaging });
+//       messaging.onMessage((message) => {
+//         // setIniMessage(message);
+//         console.log("MASUK SINI DONG");
+//         alert(title);
+//         const { title, body } = JSON.parse(message.data.notification);
+//         var options = {
+//           body,
+//         };
+//         registration.showNotification(title, options);
+//       });
+//     }
+//   });
 
-  return <div>{iniToken}, {iniMessage}</div>;
-}
-export default App;
+//   return <div>{iniToken}, {iniMessage}</div>;
+// }
+// export default App;

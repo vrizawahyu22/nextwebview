@@ -1,15 +1,3 @@
-// importScripts("https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js");
-// importScripts("https://www.gstatic.com/firebasejs/7.9.1/firebase-messaging.js");
-
-// if (!firebase.apps.length) {
-//   firebase.initializeApp({
-//   messagingSenderId: "74986552407"
-//   });
-//   firebase.messaging();
-//   //background notifications will be received here
-//   firebase.messaging().setBackgroundMessageHandler((payload) => console.log("payload", payload));
-// }
-
 importScripts('https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js');
 
@@ -27,11 +15,37 @@ firebase.messaging();
 
 //background notifications will be received here
 firebase.messaging().setBackgroundMessageHandler((payload) => {
-  console.log("PAYLOAD", payload);
+  console.log("PAYLOAD NJINGGG", payload);
+  alert("Hello! I am an alert box!");
   const { title, body } = JSON.parse(payload.data.notification);
   var options = {
     body,
     icon: '/favicon.ico',
   };
-  registration.showNotification(title);
+  
+  self.registration.showNotification(title, options);
+});
+
+messaging.onBackgroundMessage((payload) => {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  // Customize notification here
+  const notificationTitle = 'Background Message Title';
+  const notificationOptions = {
+    body: 'Background Message body.',
+    icon: '/firebase-logo.png'
+  };
+
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
+});
+
+messaging.onMessage((message) => {
+  // setIniMessage(message);
+  console.log("MASUK SINI DONG");
+  alert(message);
+  const { title, body } = JSON.parse(message.data.notification);
+  var options = {
+    body,
+  };
+  self.registration.showNotification(title, options);
 });
