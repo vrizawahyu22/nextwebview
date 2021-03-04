@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const [color, setColor] = useState('blue');
 
   useEffect(() => {
-    window.addEventListener("message", function(event) {
-      console.log("Received post message", event);
+    window.addEventListener("message", function(msg) {
+      setColor(msg)
     }, false);
   }, []);
 
@@ -20,7 +21,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <button onClick={onPostMessage}>Halooo</button>
+      <button onClick={onPostMessage} style={{ backgroundColor: color }}>Halooo</button>
 
       {/* <main className={styles.main}>
         <h1 className={styles.title}>
