@@ -176,6 +176,6 @@
 
 export default function Home() {
   return (
-    <a href="intent://scan/#Intent;scheme=cquran;package=com.cquran;end">Coba</a>
+    <a href="cquran://app">CQURAN</a>
   )
 }
