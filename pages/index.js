@@ -2,6 +2,8 @@
 // import Head from 'next/head'
 // import styles from '../styles/Home.module.css'
 
+import { useEffect } from "react"
+
 // export default function Home() {
 //   const [color, setColor] = useState('blue');
 
@@ -175,10 +177,13 @@
 // export default App;
 
 export default function Home() {
+  useEffect(() => {
+    window.open("cquran://app")
+  }, [])
   return (
     <>
-      <a href="cquran://app">CQURAN</a>
-      <a href="intent://scan/HOST/app#Intent;scheme=cquran;package=com.cquran;end"> Pake Host </a>
+      <a href="cquran://app">CQURAN NIH</a>
+      <a href="intent://app#Intent;scheme=cquran;package=com.cquran;end"> Pake Host </a>
       <a href="intent://scan/#Intent;scheme=cquran;package=com.cquran;end"> Gapake Host </a>
     </>
   )
