@@ -176,6 +176,6 @@
 
 export default function Home() {
   return (
-    <a href="cQuran://app">Halooo</a>
+    <a href="https://wa.me/628133420049">WA</a>
   )
 }
