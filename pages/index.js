@@ -178,13 +178,11 @@ import { useEffect } from "react"
 
 export default function Home() {
   useEffect(() => {
-    window.open("cquran://app")
+    window.open("intent://app#Intent;scheme=cquran;package=com.cquran;end")
   }, [])
   return (
     <>
-      <a href="cquran://app">CQURAN NIH</a>
-      <a href="intent://app#Intent;scheme=cquran;package=com.cquran;end"> Pake Host </a>
-      <a href="intent://scan/#Intent;scheme=cquran;package=com.cquran;end"> Gapake Host </a>
+      <a href="intent://app#Intent;scheme=cquran;package=com.cquran;end">CQURAN</a>
     </>
   )
 }
