@@ -176,6 +176,6 @@
 
 export default function Home() {
   return (
-    <a href="https://wa.me/628133420049">WA</a>
+    <a href="intent://scan/#Intent;scheme=cQuran;package=com.cquran;end">Coba</a>
   )
 }
