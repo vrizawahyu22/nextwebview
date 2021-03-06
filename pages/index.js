@@ -176,6 +176,10 @@
 
 export default function Home() {
   return (
-    <a href="cquran://app">CQURAN</a>
+    <>
+      <a href="cquran://app">CQURAN</a>
+      <a href="intent://scan/HOST/app#Intent;scheme=cquran;package=com.cquran;end"> Pake Host </a>
+      <a href="intent://scan/#Intent;scheme=cquran;package=com.cquran;end"> Gapake Host </a>
+    </>
   )
 }
