@@ -2,7 +2,6 @@
 // import Head from 'next/head'
 // import styles from '../styles/Home.module.css'
 
-import { useEffect } from "react"
 
 // export default function Home() {
 //   const [color, setColor] = useState('blue');
@@ -176,13 +175,20 @@ import { useEffect } from "react"
 // }
 // export default App;
 
+
+import { useEffect } from "react"
+import { useRouter } from 'next/router'
+
 export default function Home() {
+  const router = useRouter()
+  const { id } = router.query
+
   useEffect(() => {
-    window.open("intent://app#Intent;scheme=cquran;package=com.cquran;end")
+    window.open(`intent://app/examle/${id}#Intent;scheme=cquran;package=com.cquran;end`)
   }, [])
   return (
     <>
-      <a href="intent://app#Intent;scheme=cquran;package=com.cquran;end">CQURAN</a>
+      <a href={"intent://app/example/"+id+"#Intent;scheme=cquran;package=com.cquran;end"}>CQURAN</a>
     </>
   )
 }
