@@ -184,11 +184,13 @@ export default function Home() {
   const { id } = router.query
 
   useEffect(() => {
-    window.open(`intent://app/examle/${id}#Intent;scheme=cquran;package=com.cquran;end`)
-  }, [])
+    if (id) {
+      window.open(`intent://app/example/${id}#Intent;scheme=cquran;package=com.cquran;end`)
+    }
+  }, [id])
   return (
     <>
-      <a href={"intent://app/example/"+id+"#Intent;scheme=cquran;package=com.cquran;end"}>CQURAN</a>
+      <a href={"intent://app/example/"+id+"#Intent;scheme=cquran;package=com.cquran;end"}>Continue to App</a>
     </>
   )
 }
