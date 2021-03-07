@@ -185,7 +185,7 @@ export default function Home() {
 
   useEffect(() => {
     if (id) {
-      window.open(`intent://app/example/${id}#Intent;scheme=cquran;package=com.cquran;end`)
+      window.open(`cquran://app/example${id}`)
     }
   }, [id])
   return (
