@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     document.addEventListener("message", function(msg) {
-      setColor(msg)
+      setColor(msg.data)
     }, false);
   }, []);
 
@@ -22,7 +22,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <button onClick={onPostMessage} style={{ backgroundColor: color }}>SEND MESSAGE MANTEP</button>
+      <button onClick={onPostMessage} style={{ backgroundColor: color }}>SEND MESSAGE MANTEP 1</button>
 
       <footer className={styles.footer}>
         <a
