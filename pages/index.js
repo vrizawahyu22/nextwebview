@@ -13,7 +13,7 @@ export default function Home() {
   }, []);
 
   const onPostMessage = () => {
-    window.ReactNativeWebView.postMessage('Message from webview.html');
+    window.ReactNativeWebView.postMessage('MANTEPP BOYYY');
   } 
 
   return (
@@ -22,7 +22,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <button onClick={onPostMessage} style={{ backgroundColor: color }}>SEND MESSAGE</button>
+      <button onClick={onPostMessage} style={{ backgroundColor: color }}>SEND MESSAGE MANTEP</button>
 
       <footer className={styles.footer}>
         <a
